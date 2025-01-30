@@ -370,6 +370,8 @@ body {
 
 .hero--section > figure > img {
   width: 100%;
+  height: auto;
+  display: block;
   }
 
 .hero--section > figure {
@@ -578,11 +580,13 @@ body {
 
 .clinicImg {
   width: 100%;
+  display: block;
 }
 
 .section--5 {
   width: 100%;
   position: relative;
+  
 }
 
 .section--5--description {
@@ -616,6 +620,7 @@ body {
   object-fit: cover;
   height: 80rem;
   filter: brightness(0.7);
+  display: block;
 }
 
 .section--6--form {
@@ -827,7 +832,7 @@ option {
 }
 
 .form--hidden {
-  transform: translateX(200px);
+  transform: translateX(20rem);
   opacity: 0;
   transition: all 0.3s ease;
   pointer-events: none;
@@ -1028,6 +1033,18 @@ option {
   display: flex;
   flex-direction: column;
   gap: 5rem;
+  position: relative;
+}
+
+.footer--left::after{
+  content: '';
+  height: 100%;
+  background-color:#838383 ;
+  position: absolute;
+  right: 0;
+  width: 1px;
+  transform: translateX(+50px);
+  
 }
 
 .card{
@@ -1041,7 +1058,7 @@ option {
 }
 
 .card--text a{
-  color: #626262;
+  color: #7c7c7c;
   font-size: 1.6rem;
   text-decoration: none;
 }
@@ -1061,7 +1078,7 @@ option {
 
 .card--set{
   display: flex;
-gap: 3rem;
+  gap: 3rem;
 }
 
 .footer--middle{
@@ -1086,7 +1103,7 @@ gap: 3rem;
 
 .footer--text a{
   text-decoration: none;
-  color: #626262;
+  color: #7c7c7c;
   font-size: 1.4rem;
 }
 
@@ -1105,4 +1122,52 @@ gap: 3rem;
 .footer--text--group2{
   display: flex;
   gap: 4rem;
+}
+
+.footer--bottom{
+  font-size: 1.2rem;
+  color: #7c7c7c;
+  display: flex;
+  gap: 4rem;
+  padding: 3rem 20rem;
+  background-color: #3b3644;
+  position: relative;
+}
+
+.footer--bottom::before{
+  content: "";
+  display: block;
+  width: calc(100% - 40rem);  
+  height: 1px;
+  background: #838383;
+  position: absolute;
+  top: 0;
+}
+
+.footer--bottom a{
+  font-size: 1.2rem;
+  color: #7c7c7c;
+  text-decoration: none;
+ 
+
+}
+
+.footer--bottom p:nth-of-type(2){
+  margin-left: auto;
+  font-family:  "inter", sans-serif;
+ 
+}
+
+.footer--right{
+  position: relative;
+}
+
+.footer--right::before{
+  content: '';
+  height: 100%;
+  background-color:#838383 ;
+  position: absolute;
+  left: 0;
+  width: 1px;
+  transform: translateX(-50px);
 }
