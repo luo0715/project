@@ -372,7 +372,7 @@ body {
   width: 100%;
   height: auto;
   display: block;
-  }
+}
 
 .hero--section > figure {
   position: relative;
@@ -586,7 +586,6 @@ body {
 .section--5 {
   width: 100%;
   position: relative;
-  
 }
 
 .section--5--description {
@@ -751,7 +750,7 @@ option {
   border: 1px solid white;
   text-decoration: none;
   display: flex;
-  align-items:center ;
+  align-items: center;
 }
 
 .input--1 {
@@ -983,7 +982,7 @@ option {
 
 /* //////////////////////////////footer////////////////////////////// */
 
-.footer{
+.footer {
   background-color: #3b3644;
   width: 100%;
   padding: 7rem 20rem;
@@ -992,28 +991,28 @@ option {
   justify-content: space-between;
 }
 
-.icon--group{
+.icon--group {
   display: flex;
   gap: 1.3rem;
   align-self: end;
 }
 
-.icon--footer > svg{
+.icon--footer > svg {
   width: 24rem;
   height: 6.7rem;
 }
 
-.icon--group > a > svg{
+.icon--group > a > svg {
   width: 4rem;
   height: 4rem;
 }
 
-.icon--aside{
+.icon--aside {
   display: flex;
   gap: 3.5rem;
 }
 
-.text--group{
+.text--group {
   display: flex;
   flex-direction: column;
   gap: 1rem;
@@ -1022,66 +1021,65 @@ option {
   font-weight: bold;
 }
 
-.text--group a{
+.text--group a {
   text-decoration: none;
   color: white;
   font-size: 1.4rem;
   font-weight: bold;
 }
 
-.footer--left{
+.footer--left {
   display: flex;
   flex-direction: column;
   gap: 5rem;
   position: relative;
 }
 
-.footer--left::after{
-  content: '';
+.footer--left::after {
+  content: "";
   height: 100%;
-  background-color:#838383 ;
+  background-color: #838383;
   position: absolute;
   right: 0;
   width: 1px;
   transform: translateX(+50px);
-  
 }
 
-.card{
+.card {
   display: flex;
   align-items: center;
 }
 
-.card--text p{
+.card--text p {
   color: white;
   font-size: 1.4rem;
 }
 
-.card--text a{
+.card--text a {
   color: #7c7c7c;
   font-size: 1.6rem;
   text-decoration: none;
 }
 
-.card--text{
+.card--text {
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
 }
 
-.footer--icon{
+.footer--icon {
   width: 4rem;
   height: 4rem;
   color: white;
   margin-right: 2rem;
 }
 
-.card--set{
+.card--set {
   display: flex;
   gap: 3rem;
 }
 
-.footer--middle{
+.footer--middle {
   display: flex;
   flex-direction: column;
   gap: 6.5rem;
@@ -1089,42 +1087,41 @@ option {
   align-self: center;
 }
 
-.footer--title{
+.footer--title {
   color: white;
   font-size: 1.6rem;
   font-weight: bold;
 }
 
-.footer--text{
+.footer--text {
   display: flex;
   flex-direction: column;
   gap: 1rem;
 }
 
-.footer--text a{
+.footer--text a {
   text-decoration: none;
   color: #7c7c7c;
   font-size: 1.4rem;
 }
 
-.footer--text a:hover{
+.footer--text a:hover {
   color: #cacaca;
 }
 
-
-.footer--text--group1{
+.footer--text--group1 {
   display: flex;
- flex-direction: column;
- gap: 4rem;
- justify-content: center;
+  flex-direction: column;
+  gap: 4rem;
+  justify-content: center;
 }
 
-.footer--text--group2{
+.footer--text--group2 {
   display: flex;
   gap: 4rem;
 }
 
-.footer--bottom{
+.footer--bottom {
   font-size: 1.2rem;
   color: #7c7c7c;
   display: flex;
@@ -1134,38 +1131,35 @@ option {
   position: relative;
 }
 
-.footer--bottom::before{
+.footer--bottom::before {
   content: "";
   display: block;
-  width: calc(100% - 40rem);  
+  width: calc(100% - 40rem);
   height: 1px;
   background: #838383;
   position: absolute;
   top: 0;
 }
 
-.footer--bottom a{
+.footer--bottom a {
   font-size: 1.2rem;
   color: #7c7c7c;
   text-decoration: none;
- 
-
 }
 
-.footer--bottom p:nth-of-type(2){
+.footer--bottom p:nth-of-type(2) {
   margin-left: auto;
-  font-family:  "inter", sans-serif;
- 
+  font-family: "inter", sans-serif;
 }
 
-.footer--right{
+.footer--right {
   position: relative;
 }
 
-.footer--right::before{
-  content: '';
+.footer--right::before {
+  content: "";
   height: 100%;
-  background-color:#838383 ;
+  background-color: #838383;
   position: absolute;
   left: 0;
   width: 1px;
