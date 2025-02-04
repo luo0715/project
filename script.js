@@ -481,10 +481,12 @@ const formSubmit = function (e) {
   console.log("you can start next step");
 };
 
-btnNext1.addEventListener("click", formSubmit);
-btnNext2.addEventListener("click", formSubmit);
-btnNext3.addEventListener("click", formSubmit);
-btnNext4.addEventListener("click", formSubmit);
+// btnNext1.addEventListener("click", formSubmit);
+// btnNext2.addEventListener("click", formSubmit);
+// btnNext3.addEventListener("click", formSubmit);
+// btnNext4.addEventListener("click", formSubmit);
+
+formBtn.forEach((btn) => btn.addEventListener("click", formSubmit));
 
 //////////////////////////////formChange///////////////////////
 
