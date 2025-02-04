@@ -13,6 +13,52 @@
   }
 }
 
+@media (max-width: 85em) {
+  .footer {
+    padding: 7rem 15rem;
+  }
+
+  .card--text p {
+    font-size: 1.2rem;
+  }
+
+  .card--text a {
+    font-size: 1.4rem;
+  }
+
+  .footer--text a {
+    font-size: 1.2rem;
+  }
+
+  .text--group {
+    font-size: 1.2rem;
+  }
+
+  .text--group a {
+    font-size: 1.2rem;
+  }
+
+  .footer--middle {
+    gap: 3rem;
+  }
+
+  .card--set {
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
+  }
+
+  .icon--footer > svg {
+    width: 20rem;
+    height: 4.7rem;
+  }
+
+  .icon--group > a > svg {
+    width: 3rem;
+    height: 3rem;
+  }
+}
+
 @media (max-width: 80em) {
   .nav-list .list {
     font-size: 1.6rem;

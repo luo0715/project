@@ -182,77 +182,66 @@ formBtn.forEach((btn) => (btn.disabled = true));
 
 //////////////////////////////form validation///////////////////////
 
-const containsNumber = function (name) {
-  for (let i = 0; i < name.length; i++) {
-    if (!isNaN(name[i]) && name[i] !== " ") {
-      return true;
-    }
-  }
-  return false;
+const isValidChineseName = function (name) {
+  return /^[\u4e00-\u9fa5]{2,4}$/.test(name);
 };
 
 inputs.forEach((input) => {
   input.addEventListener("input", function () {
+    ///////////////////////////form1 validation////////////////////
+
     const name = document.querySelector(".input--1");
     const phone = document.querySelector(".input--2");
     const birthYear = document.querySelector(".input--4");
     const people = document.querySelector(".input--6");
     const mail = document.querySelector(".input--7");
-    const formComplete = [0, 0, 0, 0, 0];
+    const formComplete1 = [0, 0, 0, 0, 0];
 
-    if (name.value === " " || containsNumber(name.value)) {
+    if (!isValidChineseName(name.value)) {
       name.style.backgroundColor = "#bb000073";
-      formComplete[0] = 1;
+      formComplete1[0] = 1;
     } else {
-      formComplete[0] = 0;
+      formComplete1[0] = 0;
       name.style.backgroundColor = "transparent";
     }
 
     if (phone.value === "") {
-      // alert("手機號碼不可為空");
       phone.style.backgroundColor = "#bb000073";
-      formComplete[1] = 1;
+      formComplete1[1] = 1;
     } else if (isNaN(phone.value)) {
-      // alert("請輸入正確手機格式");
-      formComplete[1] = 1;
+      formComplete1[1] = 1;
       phone.style.backgroundColor = "#bb000073";
     } else if (phone.value.length !== 10 || !phone.value.startsWith("09")) {
-      // alert("請輸入正確手機格式");
-      formComplete[1] = 1;
+      formComplete1[1] = 1;
       phone.style.backgroundColor = "#bb000073";
     } else {
-      formComplete[1] = 0;
+      formComplete1[1] = 0;
       phone.style.backgroundColor = "transparent";
     }
 
     let currentYear = new Date().getFullYear();
     if (birthYear.value === "") {
-      // alert("出生年份不可為空");
       birthYear.style.backgroundColor = "#bb000073";
-      formComplete[2] = 1;
+      formComplete1[2] = 1;
     } else if (isNaN(birthYear.value)) {
-      // alert("請輸入正確出生年份格式");
       birthYear.style.backgroundColor = "#bb000073";
-      formComplete[2] = 1;
+      formComplete1[2] = 1;
     } else if (birthYear.value < 1911 || birthYear.value > currentYear) {
-      // alert("請輸入正確出生年份格式");
       birthYear.style.backgroundColor = "#bb000073";
-      formComplete[2] = 1;
+      formComplete1[2] = 1;
     } else {
-      formComplete[2] = 0;
+      formComplete1[2] = 0;
       birthYear.style.backgroundColor = "transparent";
     }
 
     if (people.value === "") {
-      // alert("人數不可為空");
       people.style.backgroundColor = "#bb000073";
-      formComplete[3] = 1;
+      formComplete1[3] = 1;
     } else if (people.value <= 0) {
-      // alert("人數至少為1人");
       people.style.backgroundColor = "#bb000073";
-      formComplete[3] = 1;
+      formComplete1[3] = 1;
     } else {
-      formComplete[3] = 0;
+      formComplete1[3] = 0;
       people.style.backgroundColor = "transparent";
     }
 
@@ -260,247 +249,242 @@ inputs.forEach((input) => {
       mail.value !== "" &&
       (!mail.value.includes("@") || !mail.value.endsWith(".com"))
     ) {
-      // alert("請輸入正確電子郵件格式");
       mail.style.backgroundColor = "#bb000073";
-      formComplete[4] = 1;
+      formComplete1[4] = 1;
     } else if (mail.value === "") {
-      // alert("電子郵件不可為空");
       mail.style.backgroundColor = "#bb000073";
-      formComplete[4] = 1;
+      formComplete1[4] = 1;
     } else {
-      formComplete[4] = 0;
+      formComplete1[4] = 0;
       mail.style.backgroundColor = "transparent";
     }
 
-    if (formComplete.every((key) => key === 0)) {
+    if (formComplete1.every((key) => key === 0)) {
       console.log("form1 驗證通過");
       btnNext1.disabled = false;
     } else {
       console.log("驗證失敗");
       btnNext1.disabled = true;
     }
+
+    ///////////////////////////form2 validation////////////////////
+
+    const name2 = document.querySelector(".input--8");
+    const phone2 = document.querySelector(".input--9");
+    const plan = document.querySelector(".input--11");
+    const people2 = document.querySelector(".input--12");
+    const mail2 = document.querySelector(".input--13");
+    const company = document.querySelector(".input--14");
+    const formComplete2 = [0, 0, 0, 0, 0, 0];
+
+    if (!isValidChineseName(name2.value)) {
+      name2.style.backgroundColor = "#bb000073";
+      formComplete2[0] = 1;
+    } else {
+      name2.style.backgroundColor = "transparent";
+      formComplete2[0] = 0;
+    }
+
+    if (phone2.value === "") {
+      phone2.style.backgroundColor = "#bb000073";
+      formComplete2[1] = 1;
+    } else if (isNaN(phone2.value)) {
+      phone2.style.backgroundColor = "#bb000073";
+      formComplete2[1] = 1;
+    } else if (phone2.value.length !== 10 || !phone2.value.startsWith("09")) {
+      phone2.style.backgroundColor = "#bb000073";
+      formComplete2[1] = 1;
+    } else {
+      phone2.style.backgroundColor = "transparent";
+      formComplete2[1] = 0;
+    }
+
+    if (plan.value === "") {
+      plan.style.backgroundColor = "#bb000073";
+      formComplete2[2] = 1;
+    } else {
+      plan.style.backgroundColor = "transparent";
+      formComplete2[2] = 0;
+    }
+
+    if (people2.value === "") {
+      people2.style.backgroundColor = "#bb000073";
+      formComplete2[3] = 1;
+    } else if (people2.value <= 0) {
+      people2.style.backgroundColor = "#bb000073";
+      formComplete2[3] = 1;
+    } else {
+      people2.style.backgroundColor = "transparent";
+      formComplete2[3] = 0;
+    }
+
+    if (
+      mail2.value !== "" &&
+      (!mail2.value.includes("@") || !mail2.value.includes("."))
+    ) {
+      mail2.style.backgroundColor = "#bb000073";
+      formComplete2[4] = 1;
+    } else if (mail2.value === "") {
+      mail2.style.backgroundColor = "#bb000073";
+      formComplete2[4] = 1;
+    } else {
+      mail2.style.backgroundColor = "transparent";
+      formComplete2[4] = 0;
+    }
+
+    if (company.value === "") {
+      company.style.backgroundColor = "#bb000073";
+      formComplete2[5] = 1;
+    } else {
+      company.style.backgroundColor = "transparent";
+      formComplete2[5] = 0;
+    }
+
+    if (formComplete2.every((key) => key === 0)) {
+      console.log("form2 驗證通過");
+      btnNext2.disabled = false;
+    } else {
+      console.log("驗證失敗");
+      btnNext2.disabled = true;
+    }
+
+    ///////////////////////////form3 validation////////////////////
+
+    const name3 = document.querySelector(".input--15");
+    const phone3 = document.querySelector(".input--16");
+    const people3 = document.querySelector(".input--18");
+    const mail3 = document.querySelector(".input--19");
+    const formComplete3 = [0, 0, 0, 0];
+
+    if (!isValidChineseName(name3.value)) {
+      name3.style.backgroundColor = "#bb000073";
+      formComplete3[0] = 1;
+    } else {
+      formComplete3[0] = 0;
+      name3.style.backgroundColor = "transparent";
+    }
+
+    if (phone3.value === "") {
+      phone3.style.backgroundColor = "#bb000073";
+      formComplete3[1] = 1;
+    } else if (isNaN(phone3.value)) {
+      formComplete3[1] = 1;
+      phone3.style.backgroundColor = "#bb000073";
+    } else if (phone3.value.length !== 10 || !phone3.value.startsWith("09")) {
+      formComplete3[1] = 1;
+      phone3.style.backgroundColor = "#bb000073";
+    } else {
+      formComplete3[1] = 0;
+      phone3.style.backgroundColor = "transparent";
+    }
+
+    if (people3.value === "") {
+      people3.style.backgroundColor = "#bb000073";
+      formComplete3[2] = 1;
+    } else if (people3.value <= 0) {
+      people3.style.backgroundColor = "#bb000073";
+      formComplete3[2] = 1;
+    } else {
+      formComplete3[2] = 0;
+      people3.style.backgroundColor = "transparent";
+    }
+
+    if (
+      mail3.value !== "" &&
+      (!mail3.value.includes("@") || !mail3.value.endsWith(".com"))
+    ) {
+      mail3.style.backgroundColor = "#bb000073";
+      formComplete3[3] = 1;
+    } else if (mail3.value === "") {
+      mail3.style.backgroundColor = "#bb000073";
+      formComplete3[3] = 1;
+    } else {
+      formComplete3[3] = 0;
+      mail3.style.backgroundColor = "transparent";
+    }
+
+    if (formComplete3.every((key) => key === 0)) {
+      console.log("form3 驗證通過");
+      btnNext3.disabled = false;
+    } else {
+      console.log("驗證失敗");
+      btnNext3.disabled = true;
+    }
+
+    ///////////////////////////form4 validation////////////////////
+
+    const name4 = document.querySelector(".input--20");
+    const phone4 = document.querySelector(".input--21");
+    const people4 = document.querySelector(".input--23");
+    const mail4 = document.querySelector(".input--24");
+    const formComplete4 = [0, 0, 0, 0];
+
+    if (!isValidChineseName(name4.value)) {
+      name4.style.backgroundColor = "#bb000073";
+      formComplete4[0] = 1;
+    } else {
+      formComplete4[0] = 0;
+      name4.style.backgroundColor = "transparent";
+    }
+
+    if (phone4.value === "") {
+      phone4.style.backgroundColor = "#bb000073";
+      formComplete4[1] = 1;
+    } else if (isNaN(phone4.value)) {
+      formComplete4[1] = 1;
+      phone4.style.backgroundColor = "#bb000073";
+    } else if (phone4.value.length !== 10 || !phone4.value.startsWith("09")) {
+      formComplete4[1] = 1;
+      phone4.style.backgroundColor = "#bb000073";
+    } else {
+      formComplete4[1] = 0;
+      phone4.style.backgroundColor = "transparent";
+    }
+
+    if (people4.value === "") {
+      people4.style.backgroundColor = "#bb000073";
+      formComplete4[2] = 1;
+    } else if (people4.value <= 0) {
+      people4.style.backgroundColor = "#bb000073";
+      formComplete4[2] = 1;
+    } else {
+      formComplete4[2] = 0;
+      people4.style.backgroundColor = "transparent";
+    }
+
+    if (
+      mail4.value !== "" &&
+      (!mail4.value.includes("@") || !mail4.value.endsWith(".com"))
+    ) {
+      mail4.style.backgroundColor = "#bb000073";
+      formComplete4[3] = 1;
+    } else if (mail4.value === "") {
+      mail4.style.backgroundColor = "#bb000073";
+      formComplete4[3] = 1;
+    } else {
+      formComplete4[3] = 0;
+      mail4.style.backgroundColor = "transparent";
+    }
+
+    if (formComplete4.every((key) => key === 0)) {
+      console.log("form4 驗證通過");
+      btnNext4.disabled = false;
+    } else {
+      console.log("驗證失敗");
+      btnNext4.disabled = true;
+    }
   });
 });
 
-// const handleFormSubmit2 = function (e) {
-//   e.preventDefault();
-
-//   if ([...form2].some((form) => form.classList.contains("form--hidden")))
-//     return;
-
-//   const name = document.querySelector(".input--8");
-//   const phone = document.querySelector(".input--9");
-//   const plan = document.querySelector(".input--11");
-//   const people = document.querySelector(".input--12");
-//   const mail = document.querySelector(".input--13");
-//   const formComplete = [0, 0, 0, 0, 0];
-
-//   if (name.value === "" || containsNumber(name.value)) {
-//     alert("姓名不可為空或者包含數字");
-//     formComplete[0] = 1;
-//   } else {
-//     formComplete[0] = 0;
-//   }
-
-//   if (phone.value === "") {
-//     alert("手機號碼不可為空");
-//     formComplete[1] = 1;
-//   } else if (isNaN(phone.value)) {
-//     alert("請輸入正確手機格式");
-//     formComplete[1] = 1;
-//   } else if (phone.value.length !== 10 || !phone.value.startsWith("09")) {
-//     alert("請輸入正確手機格式");
-//     formComplete[1] = 1;
-//   } else {
-//     formComplete[1] = 0;
-//   }
-
-//   if (plan.value === "") {
-//     alert("公司名稱不可為空");
-//     formComplete[2] = 1;
-//   } else {
-//     formComplete[2] = 0;
-//   }
-
-//   if (people.value === "") {
-//     alert("人數不可為空");
-//     formComplete[3] = 1;
-//   } else if (people.value <= 0) {
-//     alert("人數至少為1人");
-//     formComplete[3] = 1;
-//   } else {
-//     formComplete[3] = 0;
-//   }
-
-//   if (
-//     mail.value !== "" &&
-//     (!mail.value.includes("@") || !mail.value.includes("."))
-//   ) {
-//     alert("請輸入正確電子郵件格式");
-//     formComplete[4] = 1;
-//   } else if (mail.value === "") {
-//     alert("電子郵件不可為空");
-//     formComplete[4] = 1;
-//   } else {
-//     formComplete[4] = 0;
-//   }
-
-//   if (formComplete.every((key) => key === 0)) {
-//     console.log("form2 驗證通過");
-// 進行下一步動作
-//   }
-// };
-
-btnNext1.addEventListener("click", function (e) {
+const formSubmit = function (e) {
   e.preventDefault();
   console.log("you can start next step");
-});
-// btnNext2.addEventListener("click", handleFormSubmit2);
+};
 
-// const formSubmitCheck1 = function (status) {
-//   btnNext1.addEventListener("click", function (e) {
-//     e.preventDefault();
-
-//     const name = document.querySelector(".input--1");
-//     const phone = document.querySelector(".input--2");
-//     const birthYear = document.querySelector(".input--4");
-//     const people = document.querySelector(".input--6");
-//     const mail = document.querySelector(".input--7");
-//     const formComplete = [0, 0, 0, 0, 0];
-
-//     if (status === true) {
-//       if (name.value === "" || containsNumber(name.value)) {
-//         alert("姓名不可為空或者包含數字");
-//         formComplete[0] = 1;
-//       } else {
-//         formComplete[0] = 0;
-//       }
-
-//       if (phone.value === "") {
-//         alert("手機號碼不可為空");
-//         formComplete[1] = 1;
-//       } else if (isNaN(phone.value)) {
-//         alert("請輸入正確手機格式");
-//         formComplete[1] = 1;
-//       } else if (phone.value.length !== 10 || !phone.value.startsWith("09")) {
-//         alert("請輸入正確手機格式");
-//         formComplete[1] = 1;
-//       } else {
-//         formComplete[1] = 0;
-//       }
-
-//       let currentYear = new Date().getFullYear();
-//       if (birthYear.value === "") {
-//         alert("出生年份不可為空");
-//         formComplete[2] = 1;
-//       } else if (isNaN(birthYear.value)) {
-//         alert("請輸入正確出生年份格式");
-//         formComplete[2] = 1;
-//       } else if (birthYear.value < 1911 || birthYear.value > currentYear) {
-//         alert("請輸入正確出生年份格式");
-//         formComplete[2] = 1;
-//       } else {
-//         formComplete[2] = 0;
-//       }
-
-//       if (people.value === "") {
-//         alert("人數不可為空");
-//         formComplete[3] = 1;
-//       } else if (people.value <= 0) {
-//         alert("人數至少為1人");
-//         formComplete[3] = 1;
-//       } else {
-//         formComplete[3] = 0;
-//       }
-
-//       if (
-//         mail.value !== "" &&
-//         (!mail.value.includes("@") || !mail.value.includes("."))
-//       ) {
-//         alert("請輸入正確電子郵件格式");
-//         formComplete[4] = 1;
-//       } else if (mail.value === "") {
-//         alert("電子郵件不可為空");
-//         formComplete[4] = 1;
-//       } else {
-//         formComplete[4] = 0;
-//       }
-
-//       if (formComplete.every((key) => key === 0)) {
-//         console.log(123);
-//       }
-//     }
-//   });
-// };
-// formSubmitCheck1(active);
-
-// const formSubmitCheck2 = function (status) {
-//   btnNext2.addEventListener("click", function (e) {
-//     e.preventDefault();
-
-//     const name = document.querySelector(".input--8");
-//     const phone = document.querySelector(".input--9");
-//     const plan = document.querySelector(".input--11");
-//     const people = document.querySelector(".input--12");
-//     const mail = document.querySelector(".input--13");
-//     const formComplete = [0, 0, 0, 0, 0];
-
-//     if (!status) return;
-//     if (name.value === "" || containsNumber(name.value)) {
-//       alert("姓名不可為空或者包含數字");
-//       formComplete[0] = 1;
-//     } else {
-//       formComplete[0] = 0;
-//     }
-
-//     if (phone.value === "") {
-//       alert("手機號碼不可為空");
-//       formComplete[1] = 1;
-//     } else if (isNaN(phone.value)) {
-//       alert("請輸入正確手機格式");
-//       formComplete[1] = 1;
-//     } else if (phone.value.length !== 10 || !phone.value.startsWith("09")) {
-//       alert("請輸入正確手機格式");
-//       formComplete[1] = 1;
-//     } else {
-//       formComplete[1] = 0;
-//     }
-
-//     if (plan.value === "") {
-//       alert("公司名稱不可為空");
-//       formComplete[2] = 1;
-//     } else {
-//       formComplete[2] = 0;
-//     }
-
-//     if (people.value === "") {
-//       alert("人數不可為空");
-//       formComplete[3] = 1;
-//     } else if (people.value <= 0) {
-//       alert("人數至少為1人");
-//       formComplete[3] = 1;
-//     } else {
-//       formComplete[3] = 0;
-//     }
-
-//     if (
-//       mail.value !== "" &&
-//       (!mail.value.includes("@") || !mail.value.includes("."))
-//     ) {
-//       alert("請輸入正確電子郵件格式");
-//       formComplete[4] = 1;
-//     } else if (mail.value === "") {
-//       alert("電子郵件不可為空");
-//       formComplete[4] = 1;
-//     } else {
-//       formComplete[4] = 0;
-//     }
-
-//     if (formComplete.every((key) => key === 0)) {
-//       console.log(123);
-//     }
-//   });
-// };
+btnNext1.addEventListener("click", formSubmit);
+btnNext2.addEventListener("click", formSubmit);
+btnNext3.addEventListener("click", formSubmit);
+btnNext4.addEventListener("click", formSubmit);
 
 //////////////////////////////formChange///////////////////////
 
@@ -522,6 +506,7 @@ components.forEach((component) => {
       form.classList.remove("form--hidden");
 
       inputs.forEach((input) => {
+        input.style.backgroundColor = "transparent";
         if (!input.classList.contains("option")) {
           input.value = "";
         }
