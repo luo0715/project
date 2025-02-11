@@ -4,7 +4,6 @@
   }
   .navigationbar {
     grid-template-columns: 22rem 1fr;
-    grid-template-rows: repeat(2, 1fr);
     padding: 2rem;
   }
   .logo {
@@ -58,7 +57,10 @@
 }
 
 @media (max-width: 80em) {
-  .nav-list .list {
+  html {
+    font-size: 55%;
+  }
+  /* .nav-list .list {
     font-size: 1.6rem;
   }
   .clinic--1 {
@@ -69,19 +71,21 @@
   }
   .clinic--3 {
     font-size: 0.78rem;
-  }
+  } */
 }
 
-@media (max-width: 75em) {
+/* @media (max-width: 75em) {
   .nav-list .list {
     font-size: 1.6rem;
   }
-}
+} */
 
-@media (max-width: 69em) {
-  .navigationbar {
+@media (max-width: 71em) {
+  html {
+    font-size: 50%;
+  }
+  /* .navigationbar {
     grid-template-columns: 22rem 1fr;
-    grid-template-rows: repeat(2, 1fr);
     padding: 2rem;
   }
   .logo {
@@ -113,5 +117,11 @@
     color: #e98f00;
     font-size: 5rem;
     font-family: "Julius Sans One", sans-serif;
+  } */
+}
+
+@media (max-width: 64em) {
+  html {
+    font-size: 45%;
   }
 }

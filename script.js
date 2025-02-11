@@ -17,7 +17,7 @@ const btnNext3 = document.querySelector(".btn--next--3");
 const btnNext4 = document.querySelector(".btn--next--4");
 //////////////////////////////screen loading///////////////////////
 
-document.addEventListener("DOMContentLoaded", function () {
+window.addEventListener("load", function () {
   const loadingScreen = document.querySelector("#loading--screen");
   const mainContent = document.querySelector("#main--content");
 
@@ -32,27 +32,24 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 //////////////////////////////observer nav///////////////////////
+const sentinel = document.querySelector(".sentinel");
 const heroSection = document.querySelector(".hero--section");
 const nav = document.querySelector(".navigationbar");
-setTimeout(() => {
-  const navHeight = nav.getBoundingClientRect().height;
-  const heroSectionHeight = heroSection.getBoundingClientRect().height;
-  const stickyNav = function (entries) {
-    const [entry] = entries;
-    if (!entry.isIntersecting) nav.classList.add("sticky");
-    else nav.classList.remove("sticky");
-  };
-  const headerObserver = new IntersectionObserver(stickyNav, {
-    root: null,
-    threshold: 0,
-    rootMargin: `-${heroSectionHeight - navHeight}px`,
-  });
-  headerObserver.observe(heroSection);
-}, 5000);
+
+const stickyNav = function (entries) {
+  const [entry] = entries;
+  if (!entry.isIntersecting) nav.classList.add("sticky");
+  else nav.classList.remove("sticky");
+};
+const headerObserver = new IntersectionObserver(stickyNav, {
+  root: null,
+  threshold: 0,
+});
+headerObserver.observe(sentinel);
 
 //////////////////////////////observer section///////////////////////
 
-const revealSetion = function (entries, observer) {
+const revealSetion = function (entries) {
   entries.forEach((entry) => {
     if (!entry.isIntersecting) entry.target.classList.add("section--hidden");
     else entry.target.classList.remove("section--hidden");
@@ -62,6 +59,7 @@ const revealSetion = function (entries, observer) {
 const sectionObserver = new IntersectionObserver(revealSetion, {
   root: null,
   threshold: 0.1,
+  rootMargin: "100px",
 });
 
 allSections.forEach((section) => {
@@ -152,12 +150,27 @@ home.addEventListener("click", function (e) {
 const bookingBtn = document.querySelector(".btn--booking");
 bookingBtn.addEventListener("click", function (e) {
   e.preventDefault();
-  const navHeight = nav.getBoundingClientRect().height;
+
+  let navHeight = nav.getBoundingClientRect().height;
+  console.log(navHeight);
   const sectionTop = section6.offsetTop;
-  window.scrollTo({
-    top: sectionTop - navHeight,
-    behavior: "smooth",
-  });
+  // console.log(sectionTop - navHeight);
+
+  if (nav.classList.contains("sticky")) {
+    window.scrollTo({
+      top: sectionTop - navHeight,
+      behavior: "smooth",
+    });
+    console.log(sectionTop - navHeight);
+  } else {
+    navHeight += 81;
+    window.scrollTo({
+      top: sectionTop - navHeight,
+      behavior: "smooth",
+    });
+    console.log(sectionTop - navHeight);
+  }
+  console.log(navHeight);
 });
 
 //////////////////////////////initial form///////////////////////

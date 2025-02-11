@@ -157,8 +157,8 @@ body {
   transition: all 1s;
   display: flex;
   align-items: center;
-  height: 8.1rem;
-  position: fixed;
+  height: 100%;
+  position: absolute;
   right: 0;
 }
 
@@ -367,7 +367,6 @@ body {
 }
 
 /* //////////////////////////////navigation////////////////////////////// */
-
 .hero--section > figure > img {
   width: 100%;
   height: auto;
@@ -608,6 +607,16 @@ body {
 }
 
 /* //////////////////////////////section--5////////////////////////////// */
+
+/* .form--confirm {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 60rem;
+  height: 40rem;
+  background-color: #7c7c7c;
+  transform: translate(-50%, -50%);
+} */
 
 .section--6 {
   width: 100%;
