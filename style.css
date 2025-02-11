@@ -608,7 +608,7 @@ body {
 
 /* //////////////////////////////section--5////////////////////////////// */
 
-/* .form--confirm {
+.form--confirm {
   position: absolute;
   top: 50%;
   left: 50%;
@@ -616,7 +616,15 @@ body {
   height: 40rem;
   background-color: #7c7c7c;
   transform: translate(-50%, -50%);
-} */
+  border-radius: 10px;
+}
+
+.btn--goback {
+  position: absolute;
+  left: 50%;
+  bottom: 10%;
+  transform: translate(-50%, -50%);
+}
 
 .section--6 {
   width: 100%;

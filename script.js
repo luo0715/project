@@ -15,6 +15,7 @@ const btnNext1 = document.querySelector(".btn--next--1");
 const btnNext2 = document.querySelector(".btn--next--2");
 const btnNext3 = document.querySelector(".btn--next--3");
 const btnNext4 = document.querySelector(".btn--next--4");
+const formConfirm = document.querySelector(".form--confirm");
 //////////////////////////////screen loading///////////////////////
 
 window.addEventListener("load", function () {
@@ -491,15 +492,9 @@ inputs.forEach((input) => {
 
 const formSubmit = function (e) {
   e.preventDefault();
+  formConfirm.classList.remove("hidden");
   console.log("you can start next step");
 };
-
-// btnNext1.addEventListener("click", formSubmit);
-// btnNext2.addEventListener("click", formSubmit);
-// btnNext3.addEventListener("click", formSubmit);
-// btnNext4.addEventListener("click", formSubmit);
-
-formBtn.forEach((btn) => btn.addEventListener("click", formSubmit));
 
 //////////////////////////////formChange///////////////////////
 
@@ -537,5 +532,25 @@ components.forEach((component) => {
     });
 
     btn.classList.add("active");
+  });
+});
+
+//////////////////////////////form submit///////////////////////
+
+formBtn.forEach((btn) => btn.addEventListener("click", formSubmit));
+
+//////////////////////////////form close///////////////////////
+
+const btnGoBack = document.querySelector(".btn--goback");
+btnGoBack.addEventListener("click", function () {
+  formConfirm.classList.add("hidden");
+  inputs.forEach((input) => {
+    input.style.backgroundColor = "transparent";
+    if (!input.classList.contains("option")) {
+      input.value = "";
+    }
+  });
+  formBtn.forEach((btn) => {
+    btn.disabled = true;
   });
 });
