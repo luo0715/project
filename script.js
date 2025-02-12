@@ -200,7 +200,7 @@ const isValidChineseName = function (name) {
   return /^[\u4e00-\u9fa5]{2,4}$/.test(name);
 };
 const isValidEmail = function (email) {
-  return /^[a-zA-Z0-9._%+-]+@(?!(.*\.\.)+)[a-zA-Z0-9.-]+\.[a-zA-Z]{3,}$/.test(
+  return /^(?!\.)(?!.*\.\.)[a-zA-Z0-9._%+-]+(?<!\.)@(?!(.*\.\.)+)[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(
     email
   );
 };
