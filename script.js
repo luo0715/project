@@ -199,6 +199,11 @@ formBtn.forEach((btn) => (btn.disabled = true));
 const isValidChineseName = function (name) {
   return /^[\u4e00-\u9fa5]{2,4}$/.test(name);
 };
+const isValidEmail = function (email) {
+  return /^[a-zA-Z0-9._%+-]+@(?!(.*\.\.)+)[a-zA-Z0-9.-]+\.[a-zA-Z]{3,}$/.test(
+    email
+  );
+};
 
 inputs.forEach((input) => {
   input.addEventListener("input", function () {
@@ -259,10 +264,7 @@ inputs.forEach((input) => {
       people.style.backgroundColor = "transparent";
     }
 
-    if (
-      mail.value !== "" &&
-      (!mail.value.includes("@") || !mail.value.endsWith(".com"))
-    ) {
+    if (mail.value !== "" && !isValidEmail(mail.value)) {
       mail.style.backgroundColor = "#bb000073";
       formComplete1[4] = 1;
     } else if (mail.value === "") {
@@ -332,10 +334,7 @@ inputs.forEach((input) => {
       formComplete2[3] = 0;
     }
 
-    if (
-      mail2.value !== "" &&
-      (!mail2.value.includes("@") || !mail2.value.includes("."))
-    ) {
+    if (mail2.value !== "" && isValidEmail(mail.value)) {
       mail2.style.backgroundColor = "#bb000073";
       formComplete2[4] = 1;
     } else if (mail2.value === "") {
@@ -403,10 +402,7 @@ inputs.forEach((input) => {
       people3.style.backgroundColor = "transparent";
     }
 
-    if (
-      mail3.value !== "" &&
-      (!mail3.value.includes("@") || !mail3.value.endsWith(".com"))
-    ) {
+    if (mail3.value !== "" && isValidEmail(mail.value)) {
       mail3.style.backgroundColor = "#bb000073";
       formComplete3[3] = 1;
     } else if (mail3.value === "") {
@@ -466,10 +462,7 @@ inputs.forEach((input) => {
       people4.style.backgroundColor = "transparent";
     }
 
-    if (
-      mail4.value !== "" &&
-      (!mail4.value.includes("@") || !mail4.value.endsWith(".com"))
-    ) {
+    if (mail4.value !== "" && isValidEmail(mail.value)) {
       mail4.style.backgroundColor = "#bb000073";
       formComplete4[3] = 1;
     } else if (mail4.value === "") {
@@ -489,12 +482,6 @@ inputs.forEach((input) => {
     }
   });
 });
-
-const formSubmit = function (e) {
-  e.preventDefault();
-  formConfirm.classList.remove("hidden");
-  console.log("you can start next step");
-};
 
 //////////////////////////////formChange///////////////////////
 
@@ -537,6 +524,20 @@ components.forEach((component) => {
 
 //////////////////////////////form submit///////////////////////
 
+const formSubmit = function (e) {
+  e.preventDefault();
+  formConfirm.classList.remove("hidden");
+  formBtn.forEach((btn) => {
+    btn.disabled = true;
+  });
+  inputs.forEach((input) => {
+    input.style.backgroundColor = "transparent";
+    if (!input.classList.contains("option")) {
+      input.value = "";
+    }
+  });
+};
+
 formBtn.forEach((btn) => btn.addEventListener("click", formSubmit));
 
 //////////////////////////////form close///////////////////////
@@ -544,13 +545,5 @@ formBtn.forEach((btn) => btn.addEventListener("click", formSubmit));
 const btnGoBack = document.querySelector(".btn--goback");
 btnGoBack.addEventListener("click", function () {
   formConfirm.classList.add("hidden");
-  inputs.forEach((input) => {
-    input.style.backgroundColor = "transparent";
-    if (!input.classList.contains("option")) {
-      input.value = "";
-    }
-  });
-  formBtn.forEach((btn) => {
-    btn.disabled = true;
-  });
+  formSubmit();
 });
