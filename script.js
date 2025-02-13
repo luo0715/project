@@ -16,6 +16,7 @@ const btnNext2 = document.querySelector(".btn--next--2");
 const btnNext3 = document.querySelector(".btn--next--3");
 const btnNext4 = document.querySelector(".btn--next--4");
 const formConfirm = document.querySelector(".form--confirm");
+const overlay = document.querySelector(".overlay");
 //////////////////////////////screen loading///////////////////////
 
 window.addEventListener("load", function () {
@@ -87,7 +88,7 @@ textX.classList.add("text--hidden--X");
 
 //////////////////////////////observer text///////////////////////
 
-const revealTextY = function (entries, observer) {
+const revealTextY = function (entries) {
   entries.forEach((entry) => {
     if (!entry.isIntersecting) entry.target.classList.add("text--hidden--Y");
     else entry.target.classList.remove("text--hidden--Y");
@@ -107,33 +108,73 @@ textY.forEach((text) => {
 //////////////////////////////slider///////////////////////
 
 const slider = function () {
-  const slides = document.querySelectorAll(".slide");
+  const container = document.querySelector(".section--3");
+  let slides = document.querySelectorAll(".slide");
   const btnRight = document.querySelector(".btn--right");
   const btnLeft = document.querySelector(".btn--left");
+
+  const firstClone = slides[0].cloneNode(true);
+  const lastClone = slides[3].cloneNode(true);
+  firstClone.classList.add("clone");
+  lastClone.classList.add("clone");
+  container.insertBefore(firstClone, btnRight);
+  container.insertBefore(lastClone, container.firstElementChild);
+
+  slides = document.querySelectorAll(".slide");
   const maxSlide = slides.length;
-  let curSlide = 0;
+  let curSlide = 1;
+
+  slides.forEach((slide) => {
+    slide.style.transition = "transform 0.5s ease";
+  });
+
   const goToSlide = function (slide) {
     slides.forEach((s, i) => {
       s.style.transform = `translateX(${100 * (i - slide)}%)`;
     });
   };
 
+  goToSlide(curSlide);
+
   const nextSlide = function () {
-    if (curSlide === maxSlide - 1) {
-      curSlide = 0;
-    } else {
-      curSlide++;
-    }
+    curSlide++;
     goToSlide(curSlide);
+
+    if (curSlide === maxSlide - 1) {
+      slides[maxSlide - 1].addEventListener(
+        "transitionend",
+        function handler() {
+          slides.forEach((slide) => (slide.style.transition = "none"));
+          curSlide = 1;
+          goToSlide(curSlide);
+          console.log(container.offsetWidth);
+          void container.offsetWidth;
+
+          slides.forEach(
+            (slide) => (slide.style.transition = "transform 0.5s ease")
+          );
+          slides[maxSlide - 1].removeEventListener("transitionend", handler);
+        }
+      );
+    }
   };
 
   const prevSlide = function () {
-    if (curSlide === 0) {
-      curSlide = maxSlide - 1;
-    } else {
-      curSlide--;
-    }
+    curSlide--;
     goToSlide(curSlide);
+    if (curSlide === 0) {
+      slides[1].addEventListener("transitionend", function handler() {
+        slides.forEach((slide) => (slide.style.transition = "none"));
+        curSlide = 4;
+        goToSlide(curSlide);
+        void container.offsetWidth;
+
+        slides.forEach(
+          (slide) => (slide.style.transition = "transform 0.5s ease")
+        );
+        slides[1].removeEventListener("transitionend", handler);
+      });
+    }
   };
 
   btnRight.addEventListener("click", nextSlide);
@@ -200,7 +241,7 @@ const isValidChineseName = function (name) {
   return /^[\u4e00-\u9fa5]{2,4}$/.test(name);
 };
 const isValidEmail = function (email) {
-  return /^(?!\.)(?!.*\.\.)[a-zA-Z0-9._%+-]+(?<!\.)@(?!(.*\.\.)+)[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(
+  return /^[A-Za-z0-9]+@[A-Za-z0-9-]+(?:\.[A-Za-z0-9-]+)*\.[A-Za-z]{2,}$/.test(
     email
   );
 };
@@ -276,10 +317,8 @@ inputs.forEach((input) => {
     }
 
     if (formComplete1.every((key) => key === 0)) {
-      console.log("form1 驗證通過");
       btnNext1.disabled = false;
     } else {
-      console.log("驗證失敗");
       btnNext1.disabled = true;
     }
 
@@ -334,7 +373,7 @@ inputs.forEach((input) => {
       formComplete2[3] = 0;
     }
 
-    if (mail2.value !== "" && isValidEmail(mail.value)) {
+    if (mail2.value !== "" && !isValidEmail(mail2.value)) {
       mail2.style.backgroundColor = "#bb000073";
       formComplete2[4] = 1;
     } else if (mail2.value === "") {
@@ -354,10 +393,8 @@ inputs.forEach((input) => {
     }
 
     if (formComplete2.every((key) => key === 0)) {
-      console.log("form2 驗證通過");
       btnNext2.disabled = false;
     } else {
-      console.log("驗證失敗");
       btnNext2.disabled = true;
     }
 
@@ -402,7 +439,7 @@ inputs.forEach((input) => {
       people3.style.backgroundColor = "transparent";
     }
 
-    if (mail3.value !== "" && isValidEmail(mail.value)) {
+    if (mail3.value !== "" && !isValidEmail(mail3.value)) {
       mail3.style.backgroundColor = "#bb000073";
       formComplete3[3] = 1;
     } else if (mail3.value === "") {
@@ -414,10 +451,8 @@ inputs.forEach((input) => {
     }
 
     if (formComplete3.every((key) => key === 0)) {
-      console.log("form3 驗證通過");
       btnNext3.disabled = false;
     } else {
-      console.log("驗證失敗");
       btnNext3.disabled = true;
     }
 
@@ -462,7 +497,7 @@ inputs.forEach((input) => {
       people4.style.backgroundColor = "transparent";
     }
 
-    if (mail4.value !== "" && isValidEmail(mail.value)) {
+    if (mail4.value !== "" && !isValidEmail(mail4.value)) {
       mail4.style.backgroundColor = "#bb000073";
       formComplete4[3] = 1;
     } else if (mail4.value === "") {
@@ -474,10 +509,8 @@ inputs.forEach((input) => {
     }
 
     if (formComplete4.every((key) => key === 0)) {
-      console.log("form4 驗證通過");
       btnNext4.disabled = false;
     } else {
-      console.log("驗證失敗");
       btnNext4.disabled = true;
     }
   });
@@ -526,7 +559,8 @@ components.forEach((component) => {
 
 const formSubmit = function (e) {
   e.preventDefault();
-  formConfirm.classList.remove("hidden");
+  formConfirm.classList.remove("form--confirm--hidden");
+  overlay.classList.remove("hidden");
   formBtn.forEach((btn) => {
     btn.disabled = true;
   });
@@ -545,5 +579,6 @@ formBtn.forEach((btn) => btn.addEventListener("click", formSubmit));
 const btnGoBack = document.querySelector(".btn--goback");
 btnGoBack.addEventListener("click", function () {
   formConfirm.classList.add("hidden");
+  overlay.classList.add("hidden");
   formSubmit();
 });
