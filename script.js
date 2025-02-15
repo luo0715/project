@@ -114,7 +114,7 @@ const slider = function () {
   const btnLeft = document.querySelector(".btn--left");
 
   const firstClone = slides[0].cloneNode(true);
-  const lastClone = slides[3].cloneNode(true);
+  const lastClone = slides[slides.length - 1].cloneNode(true);
   firstClone.classList.add("clone");
   lastClone.classList.add("clone");
   container.insertBefore(firstClone, btnRight);
@@ -131,6 +131,7 @@ const slider = function () {
   const goToSlide = function (slide) {
     slides.forEach((s, i) => {
       s.style.transform = `translateX(${100 * (i - slide)}%)`;
+      console.log(slide);
     });
   };
 
@@ -147,7 +148,7 @@ const slider = function () {
           slides.forEach((slide) => (slide.style.transition = "none"));
           curSlide = 1;
           goToSlide(curSlide);
-          console.log(container.offsetWidth);
+          // console.log(container.offsetWidth);
           void container.offsetWidth;
 
           slides.forEach(
@@ -158,6 +159,8 @@ const slider = function () {
       );
     }
   };
+
+  let autoPlay = setInterval(nextSlide, 3000);
 
   const prevSlide = function () {
     curSlide--;
@@ -177,8 +180,16 @@ const slider = function () {
     }
   };
 
-  btnRight.addEventListener("click", nextSlide);
-  btnLeft.addEventListener("click", prevSlide);
+  btnRight.addEventListener("click", function () {
+    clearInterval(autoPlay);
+    nextSlide();
+    autoPlay = setInterval(nextSlide, 3000);
+  });
+  btnLeft.addEventListener("click", function () {
+    clearInterval(autoPlay);
+    prevSlide();
+    autoPlay = setInterval(prevSlide, 3000);
+  });
 };
 slider();
 
