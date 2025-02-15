@@ -131,7 +131,6 @@ const slider = function () {
   const goToSlide = function (slide) {
     slides.forEach((s, i) => {
       s.style.transform = `translateX(${100 * (i - slide)}%)`;
-      console.log(slide);
     });
   };
 
@@ -256,7 +255,9 @@ const isValidEmail = function (email) {
     email
   );
 };
-
+const isValidPhone = function (number) {
+  return /^09\d{8}$/.test(number);
+};
 inputs.forEach((input) => {
   input.addEventListener("input", function () {
     ///////////////////////////form1 validation////////////////////
@@ -276,7 +277,7 @@ inputs.forEach((input) => {
       name.style.backgroundColor = "transparent";
     }
 
-    if (phone.value === "") {
+    if (!isValidPhone(phone.value)) {
       phone.style.backgroundColor = "#bb000073";
       formComplete1[1] = 1;
     } else if (isNaN(phone.value)) {
@@ -351,7 +352,7 @@ inputs.forEach((input) => {
       formComplete2[0] = 0;
     }
 
-    if (phone2.value === "") {
+    if (!isValidPhone(phone2.value)) {
       phone2.style.backgroundColor = "#bb000073";
       formComplete2[1] = 1;
     } else if (isNaN(phone2.value)) {
@@ -425,7 +426,7 @@ inputs.forEach((input) => {
       name3.style.backgroundColor = "transparent";
     }
 
-    if (phone3.value === "") {
+    if (!isValidPhone(phone3.value)) {
       phone3.style.backgroundColor = "#bb000073";
       formComplete3[1] = 1;
     } else if (isNaN(phone3.value)) {
@@ -483,7 +484,7 @@ inputs.forEach((input) => {
       name4.style.backgroundColor = "transparent";
     }
 
-    if (phone4.value === "") {
+    if (!isValidPhone(phone4.value)) {
       phone4.style.backgroundColor = "#bb000073";
       formComplete4[1] = 1;
     } else if (isNaN(phone4.value)) {
@@ -589,7 +590,7 @@ formBtn.forEach((btn) => btn.addEventListener("click", formSubmit));
 
 const btnGoBack = document.querySelector(".btn--goback");
 btnGoBack.addEventListener("click", function () {
-  formConfirm.classList.add("hidden");
+  formConfirm.classList.add("form--confirm--hidden");
   overlay.classList.add("hidden");
   formSubmit();
 });
