@@ -123,72 +123,96 @@ const slider = function () {
   slides = document.querySelectorAll(".slide");
   const maxSlide = slides.length;
   let curSlide = 1;
+  let isAnimating = false;
 
-  slides.forEach((slide) => {
-    slide.style.transition = "transform 0.5s ease";
+  slides.forEach((s) => {
+    s.style.transition = "transform 0.5s ease";
   });
 
   const goToSlide = function (slide) {
     slides.forEach((s, i) => {
-      s.style.transform = `translateX(${100 * (i - slide)}%)`;
+      s.style.transform = `translateX(${150 * (i - slide)}%)`;
     });
+
+    if (
+      slide > 0 &&
+      slide < maxSlide - 1 &&
+      !slides[slide].classList.contains("clone")
+    ) {
+      setTimeout(() => {
+        slides[slide].style.transform = `translateX(0%) translateY(-50px)`;
+      }, 500);
+    }
   };
 
   goToSlide(curSlide);
 
   const nextSlide = function () {
+    if (isAnimating) return;
+    isAnimating = true;
+
     curSlide++;
     goToSlide(curSlide);
 
     if (curSlide === maxSlide - 1) {
       slides[maxSlide - 1].addEventListener(
         "transitionend",
-        function handler() {
+        function handler(e) {
+          if (e.propertyName !== "transform") return;
+
           slides.forEach((slide) => (slide.style.transition = "none"));
           curSlide = 1;
           goToSlide(curSlide);
-          // console.log(container.offsetWidth);
           void container.offsetWidth;
 
           slides.forEach(
             (slide) => (slide.style.transition = "transform 0.5s ease")
           );
           slides[maxSlide - 1].removeEventListener("transitionend", handler);
+          isAnimating = false;
         }
       );
+    } else {
+      slides[curSlide].addEventListener("transitionend", function handler(e) {
+        if (e.propertyName !== "transform") return;
+        slides[curSlide].removeEventListener("transitionend", handler);
+        isAnimating = false;
+      });
     }
   };
 
-  let autoPlay = setInterval(nextSlide, 3000);
-
   const prevSlide = function () {
+    if (isAnimating) return;
+    isAnimating = true;
     curSlide--;
     goToSlide(curSlide);
+
     if (curSlide === 0) {
-      slides[1].addEventListener("transitionend", function handler() {
+      slides[1].addEventListener("transitionend", function handler(e) {
+        if (e.propertyName !== "transform") return;
         slides.forEach((slide) => (slide.style.transition = "none"));
-        curSlide = 4;
+        curSlide = maxSlide - 2;
         goToSlide(curSlide);
+
         void container.offsetWidth;
 
         slides.forEach(
           (slide) => (slide.style.transition = "transform 0.5s ease")
         );
         slides[1].removeEventListener("transitionend", handler);
+        isAnimating = false;
+      });
+    } else {
+      slides[curSlide].addEventListener("transitionend", function handler(e) {
+        if (e.propertyName !== "transform") return;
+        slides[curSlide].removeEventListener("transitionend", handler);
+        isAnimating = false;
       });
     }
   };
 
-  btnRight.addEventListener("click", function () {
-    clearInterval(autoPlay);
-    nextSlide();
-    autoPlay = setInterval(nextSlide, 3000);
-  });
-  btnLeft.addEventListener("click", function () {
-    clearInterval(autoPlay);
-    prevSlide();
-    autoPlay = setInterval(prevSlide, 3000);
-  });
+  btnRight.addEventListener("click", nextSlide);
+  btnLeft.addEventListener("click", prevSlide);
 };
 slider();
 
@@ -204,25 +228,20 @@ bookingBtn.addEventListener("click", function (e) {
   e.preventDefault();
 
   let navHeight = nav.getBoundingClientRect().height;
-  console.log(navHeight);
   const sectionTop = section6.offsetTop;
-  // console.log(sectionTop - navHeight);
 
   if (nav.classList.contains("sticky")) {
     window.scrollTo({
       top: sectionTop - navHeight,
       behavior: "smooth",
     });
-    console.log(sectionTop - navHeight);
   } else {
     navHeight += 81;
     window.scrollTo({
       top: sectionTop - navHeight,
       behavior: "smooth",
     });
-    console.log(sectionTop - navHeight);
   }
-  console.log(navHeight);
 });
 
 //////////////////////////////initial form///////////////////////
@@ -569,8 +588,7 @@ components.forEach((component) => {
 
 //////////////////////////////form submit///////////////////////
 
-const formSubmit = function (e) {
-  e.preventDefault();
+const formSubmit = function () {
   formConfirm.classList.remove("form--confirm--hidden");
   overlay.classList.remove("hidden");
   formBtn.forEach((btn) => {
@@ -592,5 +610,13 @@ const btnGoBack = document.querySelector(".btn--goback");
 btnGoBack.addEventListener("click", function () {
   formConfirm.classList.add("form--confirm--hidden");
   overlay.classList.add("hidden");
-  formSubmit();
+  formBtn.forEach((btn) => {
+    btn.disabled = true;
+  });
+  inputs.forEach((input) => {
+    input.style.backgroundColor = "transparent";
+    if (!input.classList.contains("option")) {
+      input.value = "";
+    }
+  });
 });
