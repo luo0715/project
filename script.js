@@ -117,6 +117,7 @@ const slider = function () {
   const lastClone = slides[slides.length - 1].cloneNode(true);
   firstClone.classList.add("clone");
   lastClone.classList.add("clone");
+
   container.insertBefore(firstClone, btnRight);
   container.insertBefore(lastClone, container.firstElementChild);
 
@@ -150,7 +151,6 @@ const slider = function () {
   const nextSlide = function () {
     if (isAnimating) return;
     isAnimating = true;
-
     curSlide++;
     goToSlide(curSlide);
 

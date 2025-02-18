@@ -84,6 +84,13 @@
   html {
     font-size: 50%;
   }
+
+  /* .section--3 {
+    width: 100%;
+    max-width: 70rem;
+    height: 35rem;
+    position: relative;
+  } */
   /* .navigationbar {
     grid-template-columns: 22rem 1fr;
     padding: 2rem;
